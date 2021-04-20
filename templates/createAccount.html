@@ -1,19 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Sign Up Form by Colorlib</title>
+{% extends "authorize.html" %}
 
-    <!-- Font Icon -->
-    <link rel="stylesheet" href="assets/fonts/material-icon/css/material-design-iconic-font.min.css">
 
-    <!-- Main css -->
-    <link rel="stylesheet" href="assets/css/loginstyle.css">
-</head>
-<body>
-
+{% block content%}
     <div class="main">
 
         <section class="signup">
@@ -21,36 +9,78 @@
             <div class="container">
                 <div class="signup-content">
                     <form method="POST" id="signup-form" class="signup-form">
+                        {{ form.hidden_tag() }}
                         <h2 class="form-title">Create account</h2>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="name" id="name" placeholder="Your Name"/>
+                            {% if form.username.errors %}
+                            {{ form.username(class="form-input is-invalid", id="name", placeholder="Your Name") }}
+                            <div class="invalid-feedback">
+                                    {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                            </div>
+    
+                            {% else %}
+                            {{ form.username(class="form-input", id="name", placeholder="Your Name") }}
+                            {% endif %}
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-input" name="email" id="email" placeholder="Your Email"/>
+                            {% if form.email.errors %}
+                            {{ form.email(class="form-input is-invalid", id="email", placeholder="Your Email") }}
+                            <div class="invalid-feedback">
+                                    {% for error in form.email.errors %}
+                                    <span>{{ error }}</span>
+                                    {% endfor %}
+                            </div>
+    
+                            {% else %}
+                            {{ form.email(class="form-input", id="email", placeholder="Your Email") }}
+                            {% endif %}
+                            
+                            
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-input" name="password" id="password" placeholder="Password"/>
-                            <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                            {% if form.password.errors %}
+                        {{ form.password(class="form-input is-invalid",  id="password", placeholder="Password") }}
+                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        <div class="invalid-feedback">
+                            {% for error in form.password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ form.password(class="form-input", id="password", placeholder="Password") }}
+                        {% endif %}
                         </div>
                         <div class="form-group">
-                            <input type="password" class="form-input" name="re_password" id="re_password" placeholder="Repeat your password"/>
+                            {% if form.confirm_password.errors %}
+                            {{ form.confirm_password(class="form-input is-invalid",  id="re_password", placeholder="Repeat your password") }}
+                        <span toggle="#password" class="zmdi zmdi-eye field-icon toggle-password"></span>
+                        <div class="invalid-feedback">
+                            {% for error in form.confirm_password.errors %}
+                            <span>{{ error }}</span>
+                            {% endfor %}
+                    </div>
+                    {% else %}
+                    {{ form.confirm_password(class="form-input",  id="re_password", placeholder="Repeat your password") }}
+                        {% endif %}
+                            
+                            
                         </div>
                         
                         <div class="form-group">
-                            <input type="submit" name="submit" id="submit" class="form-submit" value="Sign up"/>
+                            {{ form.submit(id="submit", class="form-submit") }}
+                           
                         </div>
                     </form>
                     <p class="loginhere">
-                        Have already an account ? <a href="login.html" class="loginhere-link">Login here</a>
+                        Have already an account ? <a href="{{ url_for('login') }}" class="loginhere-link">Login here</a>
                     </p>
                 </div>
             </div>
         </section>
 
     </div>
+    {% endblock %}
 
-    <!-- JS -->
-    <script src="assets/vendor/jquery/jquery.min.js"></script>
-    <script src="js/main.js"></script>
-</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
+    

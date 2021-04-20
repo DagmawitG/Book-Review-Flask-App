@@ -1,11 +1,14 @@
 import os
 
-from flask import Flask, session
+from flask import Flask, session,render_template,url_for,flash,redirect
 from flask_session import Session
+from flask_sqlalchemy import SQLAlchemy
+from forms import RegistrationForm,LoginForm
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'da3f03842283a7023ea42bc7738ab17a'
 
 # Check for environment variable
 if not os.getenv("DATABASE_URL"):
@@ -27,5 +30,43 @@ db = scoped_session(sessionmaker(bind=engine))
 
 
 @app.route("/")
+@app.route("/welcome" , )
+def welcome():
+    return render_template('welcome.html')
+@app.route("/login", endpoint= 'login',methods=['GET','POST'])
+def login():
+    form = LoginForm()
+    if form.validate_on_submit():
+        if (form.username.data == 'Dagmawit' and form.password.data == '1234'):
+            flash(f'Welcome back {form.username.data}!', 'success')
+            return redirect(url_for('index'))
+        else:
+             flash(f'Login Unsuccessful, Please check your username and password', 'danger')
+            
+    return render_template('login.html',form = form)
+@app.route("/createAccount" , endpoint= 'createAccount',methods=['GET','POST'])
+def createAccount():
+    form = RegistrationForm()
+    if form.validate_on_submit():
+        flash(f'Account created for {form.username.data},\n Please Login!', 'success')
+        return redirect(url_for('login'))
+    return render_template('createAccount.html',form = form)
+
+@app.route("/index", endpoint= 'index')
 def index():
-    return "Project One: TODO"
+    return render_template('index.html')
+@app.route("/contact", endpoint= 'contact')
+def contact():
+    return render_template('contact.html')
+@app.route("/review", endpoint= 'review')
+def review():
+    return render_template('review.html')
+@app.route("/single", endpoint= 'single')
+def single():
+    return render_template('single.html')
+
+
+
+
+if __name__ == '__main__':
+    app.run(debug=True)
