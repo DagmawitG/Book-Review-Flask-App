@@ -76,40 +76,26 @@ def index():
                             {'isbn':search_text}).fetchall()
         if not books:
             
-            flash("No book with specified ISBN Number")
+            flash(f'No book with specified ISBN Number', 'danger')
         return render_template("review.html",books = books ) 
    
-    search_text = " % " + search_text + " % "
+    
     if option == 'author':
-        books = db.execute("SELECT * FROM books WHERE author LIKE :search_text",
+        books = db.execute("SELECT * FROM books WHERE author=:search_text",
                             {'search_text':search_text}).fetchall()
         if not books:
-            flash("No book with specified Author")
+            flash(f'No book with specified Author', 'danger')
         return render_template("review.html",books = books ) 
     if option == 'title':
-        books = db.execute("SELECT * FROM books WHERE title LIKE :search_text",
+        books = db.execute("SELECT * FROM books WHERE title=:search_text",
                             {'search_text':search_text}).fetchall()
         if not books:
-            flash("No book with specified Author")
+            flash(f'No book with specified Title', 'danger')
         return render_template("review.html",books = books ) 
         
         
 
-    # if form.validate_on_submit():
-    #     try: 
-    #         books = db.execute("SELECT * FROM books WHERE (title LIKE :title OR author LIKE :author OR year LIKE :year)", { "title":{form.search.data}, "author":{form.search.data}, "year":{form.search.data}}).fetchall()
-    #         if books is None:
-    #             flash("Hey")
-    #             flash(f'Book not found', 'error')
-    #         else:
-    #             flash("No")
-    #             flash(f'Book found {e}', 'success')
-        
-    #     except Exception as e:
-    #         flash("eehh")
-    #         flash(f'Book not found {e}', 'error')
-
-        # return redirect(url_for('review', books=books))
+    
   
     
 

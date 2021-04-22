@@ -1595,7 +1595,8 @@ ul.arrow {
     background-position: 100% center; }
 
 .movie-list {
-  margin: 0 -15px; }
+  margin: 0 -15px;
+ }
   .movie-list .movie {
     width: 25%;
     padding: 0 15px;

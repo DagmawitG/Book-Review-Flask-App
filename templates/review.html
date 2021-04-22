@@ -4,26 +4,15 @@
 					<div class="page">
 						<div class="breadcrumbs">
 							<a href="index">Home</a>
-							<span>Movie Review</span>
+							<span>Search Results</span>
 						</div>
 
-						<div class="filters">
-							<select name="#" id="#" placeholder="Choose Category">
-								<option value="#">Action</option>
-								<option value="#">Drama</option>
-								<option value="#">Fantasy</option>
-								<option value="#">Horror</option>
-								<option value="#">Adventure</option>
-							</select>
-							<select name="#" id="#">
-								<option value="#">2012</option>
-								<option value="#">2013</option>
-								<option value="#">2014</option>
-							</select>
-						</div>
-						{% for book in books%}
-						<div class="container-fluid ">
-						<div class="movie-list ">
+						
+						
+						
+						
+						<div class="movie-list " >
+							{% for book in books%}
 							<div class="movie">
 								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
 								<div class="movie-title"><a href="single">{{book.title}}</a></div>
@@ -31,56 +20,15 @@
 								<p>ISBN: {{book.isbn}}</p>
 								<p>YEAR: {{book.year}}</p>
 							</div>
+							{% endfor %}
 							</div>
-						</div>
-						{% endfor %}	 
-							<!-- <div class="movie">
-								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
-								<div class="movie-title"><a href="single">The adventure of Tintin</a></div>
-								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
-							</div>
-							<div class="movie">
-								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
-								<div class="movie-title"><a href="single">Hobbit</a></div>
-								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
-							</div>
-							<div class="movie">
-								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
-								<div class="movie-title"><a href="single">Exists</a></div>
-								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
-							</div>
-							<div class="movie">
-								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
-								<div class="movie-title"><a href="single">Drive hard</a></div>
-								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
-							</div>
-							<div class="movie">
-								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
-								<div class="movie-title"><a href="single">Robocop</a></div>
-								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
-							</div>
-							<div class="movie">
-								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
-								<div class="movie-title"><a href="single">Life of Pi</a></div>
-								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
-							</div>
-							<div class="movie">
-								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
-								<div class="movie-title"><a href="single">The Colony</a></div>
-								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
-							</div> -->
-						</div> <!-- .movie-list -->
+						
+							 
+							
+						</div> 
 
-						<div class="pagination">
-							<a href="#" class="page-number prev"><i class="fa fa-angle-left"></i></a>
-							<span class="page-number current">1</span>
-							<a href="#" class="page-number">2</a>
-							<a href="#" class="page-number">3</a>
-							<a href="#" class="page-number">4</a>
-							<a href="#" class="page-number">5</a>
-							<a href="#" class="page-number next"><i class="fa fa-angle-right"></i></a>
-						</div>
-					</div>
+						
+					
 
 					{% endblock%}
 				
