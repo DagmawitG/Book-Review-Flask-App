@@ -1,18 +1,20 @@
 import os
 
-from flask import Flask, session,render_template,url_for,flash,redirect
+from flask import Flask, session,render_template,url_for,flash,redirect,request,jsonify
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm,LoginForm
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
+from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'da3f03842283a7023ea42bc7738ab17a'
+bcrypt = Bcrypt(app)
 
 # Check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
+# if not os.getenv("DATABASE_URL"):
+#     raise RuntimeError("DATABASE_URL is not set")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -23,9 +25,9 @@ Session(app)
 
 
 uri = os.getenv("DATABASE_URL")
-if uri.startswith("postgres://"):
-    uri = uri.replace("postgres://", "postgresql://", 1)
-engine = create_engine(uri)
+# if uri.startswith("postgres://"):
+#     uri = uri.replace("postgres://", "postgresql://", 1)
+engine = create_engine('postgresql://postgres:dagi123!@localhost:5432/bookreview')
 db = scoped_session(sessionmaker(bind=engine))
 
 
@@ -36,8 +38,10 @@ def welcome():
 @app.route("/login", endpoint= 'login',methods=['GET','POST'])
 def login():
     form = LoginForm()
+    info = db.execute("SELECT * FROM users WHERE username = :username", {"username": form.username.data}).fetchone()
     if form.validate_on_submit():
-        if (form.username.data == 'Dagmawit' and form.password.data == '1234'):
+        if (info and bcrypt.check_password_hash(info.password, form.password.data)):
+            session["user"] = info.id
             flash(f'Welcome back {form.username.data}!', 'success')
             return redirect(url_for('index'))
         else:
@@ -48,13 +52,68 @@ def login():
 def createAccount():
     form = RegistrationForm()
     if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        db.execute("INSERT INTO users (username, email, password) VALUES (:username, :email, :password)", {
+               "username": form.username.data, "email":form.email.data, "password": hashed_password})
+        db.commit()
         flash(f'Account created for {form.username.data},\n Please Login!', 'success')
+       
         return redirect(url_for('login'))
+        
     return render_template('createAccount.html',form = form)
 
-@app.route("/index", endpoint= 'index')
+@app.route("/index", endpoint= 'index', methods=['GET','POST'])
 def index():
-    return render_template('index.html')
+ 
+    if request.method == "GET":
+        return render_template("index.html")
+
+    search_text = request.form.get("search_text")
+    option = request.form.get("option")
+    if option == "isbn":
+        
+        books = db.execute("SELECT * FROM books WHERE isbn=:isbn",
+                            {'isbn':search_text}).fetchall()
+        if not books:
+            
+            flash("No book with specified ISBN Number")
+        return render_template("review.html",books = books ) 
+   
+    search_text = " % " + search_text + " % "
+    if option == 'author':
+        books = db.execute("SELECT * FROM books WHERE author LIKE :search_text",
+                            {'search_text':search_text}).fetchall()
+        if not books:
+            flash("No book with specified Author")
+        return render_template("review.html",books = books ) 
+    if option == 'title':
+        books = db.execute("SELECT * FROM books WHERE title LIKE :search_text",
+                            {'search_text':search_text}).fetchall()
+        if not books:
+            flash("No book with specified Author")
+        return render_template("review.html",books = books ) 
+        
+        
+
+    # if form.validate_on_submit():
+    #     try: 
+    #         books = db.execute("SELECT * FROM books WHERE (title LIKE :title OR author LIKE :author OR year LIKE :year)", { "title":{form.search.data}, "author":{form.search.data}, "year":{form.search.data}}).fetchall()
+    #         if books is None:
+    #             flash("Hey")
+    #             flash(f'Book not found', 'error')
+    #         else:
+    #             flash("No")
+    #             flash(f'Book found {e}', 'success')
+        
+    #     except Exception as e:
+    #         flash("eehh")
+    #         flash(f'Book not found {e}', 'error')
+
+        # return redirect(url_for('review', books=books))
+  
+    
+
+    
 @app.route("/contact", endpoint= 'contact')
 def contact():
     return render_template('contact.html')

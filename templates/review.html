@@ -21,13 +21,20 @@
 								<option value="#">2014</option>
 							</select>
 						</div>
-						<div class="movie-list">
+						{% for book in books%}
+						<div class="container-fluid ">
+						<div class="movie-list ">
 							<div class="movie">
 								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
-								<div class="movie-title"><a href="single">Maleficient</a></div>
-								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
+								<div class="movie-title"><a href="single">{{book.title}}</a></div>
+								<p>Author: {{book.author}}</p>
+								<p>ISBN: {{book.isbn}}</p>
+								<p>YEAR: {{book.year}}</p>
 							</div>
-							<div class="movie">
+							</div>
+						</div>
+						{% endfor %}	 
+							<!-- <div class="movie">
 								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
 								<div class="movie-title"><a href="single">The adventure of Tintin</a></div>
 								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
@@ -61,7 +68,7 @@
 								<figure class="movie-poster"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="#"></figure>
 								<div class="movie-title"><a href="single">The Colony</a></div>
 								<p>Sed ut perspiciatis unde omnis iste natus error voluptatem doloremque.</p>
-							</div>
+							</div> -->
 						</div> <!-- .movie-list -->
 
 						<div class="pagination">
