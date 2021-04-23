@@ -36,86 +36,32 @@
 							</div>
 							</div>
 						</div>
-						
-						<div class="row">
-							<div class="col-sm-6 col-md-3">
-								<div class="latest-movie">
-									<a href="#"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="Movie 3"></a>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
+
+						<div class="counts section-bg">
+							<h1 class="movie-title" style="text-align: center; margin-top: 30px;">Popular Books</h1>
+							<div class="row ">
+								{% for info in homeInfo %}
+					
+							  <div class="col-lg-3 col-md-2 d-md-flex align-items-md mb-5 ">
+								<div class="count-box">
+									<i class="fa fa-book"></i>
+								  
+								  <p></p>
+								  <strong>{{info.title}}</strong>
+								  <p>Author: {{info.author}}</p>
+								  <p>ISBN: {{info.isbn}}</p>
+								  <p>YEAR: {{info.year}}</p>
+
 								</div>
+							  </div>
+							  {% endfor %}
 							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="latest-movie">
-									<a href="#"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="Movie 4"></a>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="latest-movie">
-									<a href="#"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="Movie 5"></a>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="latest-movie">
-									<a href="#"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="Movie 6"></a>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-								</div>
-							</div>
+							
 						</div>
-						<div class="row">
-							<div class="col-sm-6 col-md-3">
-								<div class="latest-movie">
-									<a href="#"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="Movie 3"></a>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="latest-movie">
-									<a href="#"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="Movie 4"></a>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="latest-movie">
-									<a href="#"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="Movie 5"></a>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-								</div>
-							</div>
-							<div class="col-sm-6 col-md-3">
-								<div class="latest-movie">
-									<a href="#"><img src="{{url_for('static', filename = 'images/pic.jpg')}}" alt="Movie 6"></a>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-									<p>Hey there</p>
-								</div>
-							</div>
-						</div> 
 						
 						
-					</div>
+						
+					
 
 {% endblock %}
 				

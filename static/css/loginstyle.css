@@ -137,9 +137,9 @@ body {
   color: #222;
   font-weight: 400;
   font-family: 'Montserrat';
-  background-image: url("{url_for('static', filename = 'images/signup-bg.jpg')}}");
+  background-image: url("../images/books1.jpg");
   background-repeat: no-repeat;
-  background-size: cover;
+  background-size:contain;
   -moz-background-size: cover;
   -webkit-background-size: cover;
   -o-background-size: cover;
@@ -266,11 +266,11 @@ body {
   color: #fff;
   text-transform: uppercase;
   border: none;
-  background-image: -moz-linear-gradient(to left, #74ebd5, #9face6);
-  background-image: -ms-linear-gradient(to left, #74ebd5, #9face6);
-  background-image: -o-linear-gradient(to left, #74ebd5, #9face6);
-  background-image: -webkit-linear-gradient(to left, #74ebd5, #9face6);
-  background-image: linear-gradient(to left, #74ebd5, #9face6); }
+  background-image: -moz-linear-gradient(to left, #343d3b, #aeb0b8);
+  background-image: -ms-linear-gradient(to left,#343d3b, #aeb0b8);
+  background-image: -o-linear-gradient(to left, #343d3b, #aeb0b8);
+  background-image: -webkit-linear-gradient(to left, #343d3b, #aeb0b8);
+  background-image: linear-gradient(to left, #343d3b, #aeb0b8); }
 
 input[type=checkbox]:not(old) {
   width: 2em;
