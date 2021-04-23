@@ -6,7 +6,7 @@ from sqlalchemy.orm import scoped_session, sessionmaker
 
 
 # Set up database
-engine = create_engine('postgresql://postgres:dagi123!@localhost:5432/bookreview')
+engine = create_engine('postgresql://yxkzxdsvfclkom:86cc791678693a713e5f8c05bae3be2b75d56c3424f1e16d5f8664027575e78d@ec2-34-225-167-77.compute-1.amazonaws.com:5432/d5r51ksuqtpl6r')
 
 db = scoped_session(sessionmaker(bind=engine))
 
@@ -69,7 +69,7 @@ def create_review_table():
 
 
 if __name__ == '__main__':
-    # main()
-    # create_user_table()
+    #main()
+    #create_user_table()
     #create_book_table()
-    create_review_table()
+    #create_review_table()
