@@ -2,7 +2,6 @@ import os
 
 from flask import Flask, session,render_template,url_for,flash,redirect,request,jsonify
 
-from flask_login import logout_user
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from forms import RegistrationForm,LoginForm
