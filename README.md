@@ -4,9 +4,9 @@ This project is adopted form Harvard's most popular class CS50 Programming with 
 
 # Objectives
 
-# Become more comfortable with Python.
-# Gain experience with Flask.
-# Learn to use SQL to interact with databases.
+Become more comfortable with Python.
+Gain experience with Flask.
+Learn to use SQL to interact with databases.
 
 
 # Overview
